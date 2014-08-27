@@ -1,0 +1,7 @@
+name = custommodule
+description = Custom code
+core = 7.x
+package = custom
+dependencies[] = views
+files[] = custommodule_access_plugin.inc
+files[] = custommodule_plugin_argument_default_node.inc

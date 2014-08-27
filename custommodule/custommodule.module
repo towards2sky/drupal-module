@@ -1,0 +1,46 @@
+<?php
+
+
+  /**
+   * Implements hook_views_plugins()
+   */
+  function custommodule_views_plugins() {
+    $plugins = array(
+      'access' => array(
+        'test' => array(
+          'title' => t('Custom Access check'),
+          'help' => t('this is a custom access plugin'),
+          'handler' => 'custommodule_access_plugin',
+          'path' => drupal_get_path('module', 'custommodule'),
+        ),
+      ),
+     'argument default' => array(
+      'custommodule_node' => array(
+        'title' => t('Rajesh node IDs'),
+        'handler' => 'custommodule_plugin_argument_default_node',
+        'path' => drupal_get_path('module', 'custommodule'),  
+      ),   
+    ),
+    );     
+    return $plugins;
+  }
+  
+  
+  
+   function custommodules_access($account = NULL) {
+    global $user;
+    $access = false; 
+    $account = user_load($user->uid);
+    $optionfield = field_get_items('user', $account, 'field_option');
+ 
+    //In the future more values are possible so this is extendible
+    //For now only +eur exists
+    $allowed_values = array('eur');
+    $options = explode('+', $optionfield[0]['value']);
+    foreach ($allowed_values as $allowed_value) {
+      if (in_array($allowed_value, $options)) {
+        $access = true;
+      }
+    }  
+    return $access;
+  }
