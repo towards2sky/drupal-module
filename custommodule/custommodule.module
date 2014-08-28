@@ -44,3 +44,23 @@
     }  
     return $access;
   }
+  
+  
+  
+  /**
+ * Implements hook_views_data().
+ */
+function custommodules_views_data() {
+  $data['node']['rajesh_saini_custom_filter'] = array(
+    'title' => t('Rajesh Saini custom Filter'), // The item it appears as on the UI,
+    'help' => t('Rajesh Saini custom Filter- help text.'), // The help that appears on the UI,
+    'real field' => 'nid',
+     // Information for displaying a title as a field
+    'filter' => array(
+      'handler' => 'custommodules_user_follow_filter',
+      'label' => t('Following Saini'),
+      'type' => 'yes-no',
+    ),
+  );
+  return $data;
+}
